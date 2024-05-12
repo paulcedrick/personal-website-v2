@@ -5,6 +5,8 @@ type ProjectCardProps = {
   description?: string;
   technologies?: string[];
   cardProps?: CardProps;
+  selected?: boolean;
+  url: string;
 };
 function ProjectCard(props: ProjectCardProps) {
   const technologies = props.technologies ?? [];
@@ -16,24 +18,31 @@ function ProjectCard(props: ProjectCardProps) {
       {...cardProps}
       className={`flex transform flex-col gap-4 transition-transform duration-200 ease-in-out hover:scale-110 hover:shadow-2xl ${cardClassName}`}
     >
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-2">
+          <h2 className="text-xl font-bold">
+            <a href={props.url} target="_blank">
+              {props.title}
+            </a>
+          </h2>
+
+          {props.description && (
+            <p className="text-sm text-[#999]">{props.description}</p>
+          )}
+        </div>
+
         {technologies.length > 0 && (
-          <>
-            <p>Technologies:</p>
-            <div className="flex gap-1">
-              {technologies.map((technology) => (
-                <span
-                  key={technology}
-                  className="rounded-sm bg-[#555] px-2 py-1"
-                >
-                  {technology}
-                </span>
-              ))}
-            </div>
-          </>
+          <div className="flex gap-1">
+            {technologies.map((technology) => (
+              <span
+                key={technology}
+                className="rounded-sm bg-[#333] px-4 py-2 text-xs"
+              >
+                {technology}
+              </span>
+            ))}
+          </div>
         )}
-        <h2 className="text-lg tracking-widest">{props.title}</h2>
-        {props.description && <p>{props.description}</p>}
       </div>
     </Card>
   );

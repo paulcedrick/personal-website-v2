@@ -3,6 +3,31 @@
 import ProjectCard from "@/app/_components/project-card";
 import { useState } from "react";
 
+const listData: {
+  id: number;
+  title: string;
+  description?: string;
+  techStack: string[];
+  url: string;
+}[] = [
+  {
+    id: 1,
+    title: "Personal Website",
+    description:
+      "Laborum tempor adipisicing magna dolore Lorem nisi non elit veniam deserunt ullamco.",
+    techStack: ["#react", "#typescript", "#tailwindcss", "#nextjs", "#sst"],
+    url: "https://google.com",
+  },
+  {
+    id: 2,
+    title: "Personal Website",
+    description:
+      "Laborum tempor adipisicing magna dolore Lorem nisi non elit veniam deserunt ullamco.",
+    techStack: ["#react", "#typescript", "#tailwindcss", "#nextjs", "#sst"],
+    url: "https://google.com",
+  },
+];
+
 type ProjectListProps = {};
 function ProjectList(props: ProjectListProps) {
   const [selected, setSelected] = useState<number | undefined>(undefined);
@@ -11,17 +36,20 @@ function ProjectList(props: ProjectListProps) {
     <div className="flex flex-col gap-6">
       <h2 className="text-lg font-bold tracking-widest">Projects</h2>
       <div className="flex flex-col gap-2">
-        {[1, 2, 3, 4, 5, 6].map((_, index) => {
+        {listData.map((data) => {
           return (
             <ProjectCard
-              key={index}
+              url={data.url}
+              key={data.id}
               cardProps={{
-                onMouseEnter: () => setSelected(index),
+                onMouseEnter: () => setSelected(data.id),
                 onMouseLeave: () => setSelected(undefined),
-                className: `${selected === index ? "bg-[#333]" : ""} ${selected !== undefined && selected !== index ? "bg-[#222] opacity-50" : ""}`,
+                className: `${selected !== undefined && selected !== data.id ? "bg-[#222] opacity-50" : ""}`,
               }}
-              title="Personal Website"
-              description="Laborum tempor adipisicing magna dolore Lorem nisi non elit veniam deserunt ullamco."
+              selected={selected === data.id}
+              title={data.title}
+              description={data.description}
+              technologies={data.techStack}
             />
           );
         })}
