@@ -8,13 +8,18 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      transform: ["hover", "focus"],
       backgroundImage: {
+        "gradient-to-t": "linear-gradient(to top, var(--tw-gradient-stops))",
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar-hide")],
+  corePlugins: {
+    transitionProperty: true,
+  },
 };
 export default config;
