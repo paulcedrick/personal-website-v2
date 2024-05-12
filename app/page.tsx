@@ -1,6 +1,7 @@
 import ProjectList from "@/app/_components/project-list";
 import ExperienceList from "./_components/experience-list";
 import Navigation from "@/app/_components/navigation";
+import Footer from "@/app/_components/footer";
 
 export default function Home() {
   return (
@@ -38,7 +39,7 @@ export default function Home() {
           <Navigation />
         </div>
 
-        <div>Footer</div>
+        <Footer />
       </div>
 
       <div className="absolute right-0 px-10 py-24">
