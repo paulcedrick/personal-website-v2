@@ -13,6 +13,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.2.1",
+    "reading-duration": "^1.1.2",
     "tailwind-merge": "^2.3.0",
     "tailwind-scrollbar-hide": "^1.1.7"
   },

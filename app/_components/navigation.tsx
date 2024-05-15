@@ -24,14 +24,17 @@ function Navigation() {
   return (
     <nav>
       <ul className="flex flex-col gap-4">
-        <NavItem number="01" url="experiences">
+        <NavItem number="01" url="#experiences">
           Experiences
         </NavItem>
-        <NavItem number="02" url="experiences">
+        <NavItem number="02" url="#projects">
           Projects
         </NavItem>
-        <NavItem number="03" url="experiences">
+        <NavItem number="03" url="#articles">
           Articles
+        </NavItem>
+        <NavItem number="04" url="#contact">
+          Keep in touch
         </NavItem>
       </ul>
     </nav>

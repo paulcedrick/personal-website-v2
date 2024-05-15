@@ -2,11 +2,12 @@ import ProjectList from "@/app/_components/project-list";
 import ExperienceList from "./_components/experience-list";
 import Navigation from "@/app/_components/navigation";
 import Footer from "@/app/_components/footer";
+import ArticleList from "@/app/_components/article-list";
 
 export default function Home() {
   return (
     <main className="relative mx-auto flex h-screen max-w-[1440px] justify-between gap-4 overflow-auto scrollbar-hide">
-      <div className="fixed left-0 top-0 z-10 h-10 w-full bg-gradient-to-b from-[#222] to-transparent" />
+      <div className="fixed left-0 top-0 z-10 h-20 w-full bg-gradient-to-b from-[#111] to-transparent" />
 
       <div className="fixed flex h-screen max-w-[496px] flex-col justify-between px-10 py-24">
         <div className="flex flex-col gap-10">
@@ -42,14 +43,16 @@ export default function Home() {
         <Footer />
       </div>
 
-      <div className="absolute right-0 px-10 py-24">
+      <div className="absolute right-0 max-w-[736px] px-10 py-24">
         <div className="flex flex-col gap-20">
           <ExperienceList />
 
           <ProjectList />
+
+          <ArticleList />
         </div>
       </div>
-      <div className="fixed bottom-0 left-0 z-10 h-10 w-full bg-gradient-to-t from-[#222] to-transparent" />
+      <div className="fixed bottom-0 left-0 z-10 h-20 w-full bg-gradient-to-t from-[#111] to-transparent" />
     </main>
   );
 }

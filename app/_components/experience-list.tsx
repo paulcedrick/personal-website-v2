@@ -10,7 +10,7 @@ function ExperienceList() {
     <div className="flex flex-col gap-6">
       <h2 className="text-lg font-bold tracking-widest">Experiences</h2>
       <div className="flex flex-col gap-2">
-        {[1, 2, 3, 4, 5, 6].map((_, index) => {
+        {[1, 2, 3, 4].map((_, index) => {
           return (
             <ExperienceCard
               key={index}
