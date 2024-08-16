@@ -90,7 +90,7 @@ function ArticleList(props: ArticleListProps) {
   return (
     <div className="flex flex-col gap-6">
       <h2 className="text-lg font-bold tracking-widest">Articles</h2>
-      <div className="grid auto-rows-min grid-cols-2 gap-2">
+      <div className="grid auto-rows-min gap-2 lg:grid-cols-2">
         {dummyArticleData.map((data, index) => {
           return (
             <ArticleCard

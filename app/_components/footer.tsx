@@ -5,7 +5,7 @@ function Footer(props: FooterProps) {
   return (
     <footer className="flex flex-col gap-4">
       <p className="text-xs font-semibold">You can follow me here</p>
-      <div className="flex gap-8">
+      <div className="flex flex-wrap gap-4 xl:gap-8">
         <a className="group flex items-center gap-2 text-[#aaa]" href="#">
           <FaGithub size="24px" className="group-hover:text-[#fff]" />
           <span className="text-xs underline group-hover:text-[#fff]">

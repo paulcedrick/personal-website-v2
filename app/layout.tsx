@@ -1,3 +1,4 @@
+import { Providers } from "@/app/_components/providers";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -16,7 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} text-white`}>{children}</body>
+      <body className={`${inter.className} text-white`}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }
