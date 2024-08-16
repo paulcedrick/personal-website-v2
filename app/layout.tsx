@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Paul Cedrick Artigo | Software Engineer",
     description: "Software Engineer based in the Philippines",
-    url: "https://paulartigo.com",
+    url: "https://paulcedrick.com",
     siteName: "Paul Cedrick Artigo",
   },
   twitter: {
