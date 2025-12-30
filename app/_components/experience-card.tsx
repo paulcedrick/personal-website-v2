@@ -1,65 +1,60 @@
-import FadingCard from "@/app/_components/fading-card";
+"use client";
 
 type ExperienceCardProps = {
   title: string;
   company: string;
   dateRange: string;
   description: string;
-  className?: string;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-  onClick?: () => void;
   technologies?: string[];
-  highlights?: { title: string; description: string }[];
 };
-function ExperienceCard(props: ExperienceCardProps) {
+
+export default function ExperienceCard({
+  title,
+  company,
+  dateRange,
+  description,
+  technologies,
+}: ExperienceCardProps) {
   return (
-    <FadingCard
-      onMouseEnter={props.onMouseEnter}
-      onMouseLeave={props.onMouseLeave}
-      className={`flex transform flex-col gap-4 ${props.className}`}
-      onClick={props.onClick}
-    >
-      <div className="flex flex-col">
-        <p className="text-xs font-semibold tracking-widest text-[#999]">
-          {props.dateRange}
+    <article className="group relative py-8 pl-6 border-l-2 border-border-subtle hover:border-accent transition-colors duration-300 first:pt-0 last:pb-0">
+      {/* Timeline dot */}
+      <div className="absolute left-0 top-8 first:top-0 -translate-x-[5px] w-2 h-2 rounded-full bg-border-subtle group-hover:bg-accent transition-colors duration-300" />
+
+      <div className="space-y-3">
+        {/* Date */}
+        <p className="text-xs text-text-muted tracking-wide">
+          {dateRange}
         </p>
-        <h2 className="text-lg font-bold">{props.title}</h2>
-        <p className="">{props.company}</p>
-      </div>
 
-      <p className="text-sm font-light text-[#d9d9d9]">{props.description}</p>
-
-      {props.highlights && (
-        <div className="space-y-2 text-sm">
-          <p className="text-xs font-semibold tracking-widest text-[#999]">
-            Highlights
+        {/* Title & Company */}
+        <div>
+          <h3 className="text-text-primary font-medium">
+            {title}
+          </h3>
+          <p className="text-accent text-sm">
+            {company}
           </p>
-          <ul className="list-disc space-y-2 pl-4">
-            {props.highlights?.map((highlight) => (
-              <li key={highlight.title} className="text-[#d9d9d9]">
-                <span className="font-semibold">{highlight.title}: </span>
-                <span>{highlight.description}</span>
-              </li>
-            ))}
-          </ul>
         </div>
-      )}
 
-      {props.technologies && (
-        <div className="flex flex-wrap gap-1">
-          {props.technologies.map((technology) => (
-            <span
-              key={technology}
-              className="rounded-sm bg-[#333] px-4 py-2 text-xs"
-            >
-              {technology}
-            </span>
-          ))}
-        </div>
-      )}
-    </FadingCard>
+        {/* Description */}
+        <p className="text-text-secondary text-sm leading-relaxed">
+          {description}
+        </p>
+
+        {/* Technologies */}
+        {technologies && technologies.length > 0 && (
+          <div className="flex flex-wrap gap-2 pt-2 pb-4">
+            {technologies.map((tech) => (
+              <span
+                key={tech}
+                className="text-xs text-text-muted px-2 py-1 rounded bg-bg-elevated"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+    </article>
   );
 }
-
-export default ExperienceCard;

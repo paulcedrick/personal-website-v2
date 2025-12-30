@@ -1,54 +1,76 @@
-import FadingContainer from "@/app/_components/fading-container";
-import Card, { CardProps } from "./card";
+"use client";
+
+import { FaGithub } from "react-icons/fa6";
+import { FiExternalLink } from "react-icons/fi";
 
 type ProjectCardProps = {
   title: string;
-  description?: string;
-  technologies?: string[];
-  cardProps?: CardProps;
-  selected?: boolean;
-  url: string;
+  description: string;
+  technologies: string[];
+  githubUrl: string;
+  liveUrl?: string;
 };
-function ProjectCard(props: ProjectCardProps) {
-  const technologies = props.technologies ?? [];
-  const cardProps = props.cardProps ?? {};
-  const cardClassName = cardProps.className ?? "";
 
+export default function ProjectCard({
+  title,
+  description,
+  technologies,
+  githubUrl,
+  liveUrl,
+}: ProjectCardProps) {
   return (
-    <FadingContainer>
-      <Card
-        {...cardProps}
-        className={`flex transform flex-col gap-4 transition-transform duration-200 ease-in-out hover:scale-110 hover:shadow-2xl ${cardClassName}`}
-      >
-        <div className="flex flex-col gap-8">
-          <div className="flex flex-col gap-2">
-            <h2 className="text-xl font-bold">
-              <a href={props.url} target="_blank">
-                {props.title}
-              </a>
-            </h2>
+    <article className="group">
+      <div className="space-y-3">
+        {/* Title with links */}
+        <div className="flex items-center justify-between gap-4">
+          <h3 className="text-text-primary font-medium flex items-center gap-2">
+            <span className="text-accent">◆</span>
+            {title}
+          </h3>
 
-            {props.description && (
-              <p className="text-sm text-[#999]">{props.description}</p>
+          <div className="flex items-center gap-3">
+            <a
+              href={githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-text-muted hover:text-accent transition-colors duration-200"
+              aria-label="View on GitHub"
+            >
+              <FaGithub className="w-4 h-4" />
+            </a>
+            {liveUrl && (
+              <a
+                href={liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-text-muted hover:text-accent transition-colors duration-200"
+                aria-label="View live site"
+              >
+                <FiExternalLink className="w-4 h-4" />
+              </a>
             )}
           </div>
-
-          {technologies.length > 0 && (
-            <div className="flex flex-wrap gap-1">
-              {technologies.map((technology) => (
-                <span
-                  key={technology}
-                  className="rounded-sm bg-[#333] px-4 py-2 text-xs"
-                >
-                  {technology}
-                </span>
-              ))}
-            </div>
-          )}
         </div>
-      </Card>
-    </FadingContainer>
+
+        {/* Description */}
+        <p className="text-text-secondary text-sm leading-relaxed">
+          {description}
+        </p>
+
+        {/* Technologies */}
+        {technologies.length > 0 && (
+          <div className="flex flex-wrap gap-2 pt-1">
+            {technologies.map((tech) => (
+              <span
+                key={tech}
+                className="text-xs text-text-muted px-2 py-1 rounded bg-bg-elevated"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        )}
+      </div>
+    </article>
   );
 }
-
-export default ProjectCard;

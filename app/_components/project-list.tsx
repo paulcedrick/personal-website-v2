@@ -1,61 +1,73 @@
 "use client";
 
-import ProjectCard from "@/app/_components/project-card";
-import { useState } from "react";
+import { motion } from "framer-motion";
+import ProjectCard from "./project-card";
 
-const listData: {
-  id: number;
+type Project = {
+  id: string;
   title: string;
-  description?: string;
-  techStack: string[];
-  url: string;
-}[] = [
+  description: string;
+  technologies: string[];
+  githubUrl: string;
+  liveUrl?: string;
+};
+
+// Placeholder projects - replace with real GitHub repos later
+const projects: Project[] = [
   {
-    id: 1,
+    id: "personal-website",
     title: "Personal Website",
     description:
-      "Laborum tempor adipisicing magna dolore Lorem nisi non elit veniam deserunt ullamco.",
-    techStack: ["#react", "#typescript", "#tailwindcss", "#nextjs", "#sst"],
-    url: "https://google.com",
+      "My portfolio website built with Next.js, Tailwind CSS, and deployed with SST on AWS. Features a refined minimalist design with champagne gold accents.",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "SST", "AWS"],
+    githubUrl: "https://github.com/paulcedrick/personal-website-v2",
   },
   {
-    id: 2,
-    title: "Personal Website",
+    id: "project-2",
+    title: "Coming Soon",
     description:
-      "Laborum tempor adipisicing magna dolore Lorem nisi non elit veniam deserunt ullamco.",
-    techStack: ["#react", "#typescript", "#tailwindcss", "#nextjs", "#sst"],
-    url: "https://google.com",
+      "More projects will be added here. Check back soon or visit my GitHub profile for the latest work.",
+    technologies: ["TypeScript", "React", "Node.js"],
+    githubUrl: "https://github.com/paulcedrick",
   },
 ];
 
-type ProjectListProps = {};
-function ProjectList(props: ProjectListProps) {
-  const [selected, setSelected] = useState<number | undefined>(undefined);
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
 
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+    },
+  },
+};
+
+export default function ProjectList() {
   return (
-    <div className="flex flex-col gap-6">
-      <h2 className="text-lg font-bold tracking-widest">Projects</h2>
-      <div className="flex flex-col gap-2">
-        {listData.map((data) => {
-          return (
-            <ProjectCard
-              url={data.url}
-              key={data.id}
-              cardProps={{
-                onMouseEnter: () => setSelected(data.id),
-                onMouseLeave: () => setSelected(undefined),
-                className: `${selected !== undefined && selected !== data.id ? "bg-[#222] opacity-50" : ""}`,
-              }}
-              selected={selected === data.id}
-              title={data.title}
-              description={data.description}
-              technologies={data.techStack}
-            />
-          );
-        })}
-      </div>
-    </div>
+    <motion.div
+      className="flex flex-col gap-8"
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+    >
+      {projects.map((project) => (
+        <motion.div key={project.id} variants={itemVariants} className="pb-8 border-b border-border-subtle last:border-b-0 last:pb-0">
+          <ProjectCard {...project} />
+        </motion.div>
+      ))}
+    </motion.div>
   );
 }
-
-export default ProjectList;

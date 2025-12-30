@@ -1,39 +1,44 @@
-import Card, { CardProps } from "@/app/_components/card";
-import FadingContainer from "@/app/_components/fading-container";
+"use client";
+
+import { FaArrowRight } from "react-icons/fa6";
 
 type ArticleCardProps = {
-  cardProps?: CardProps;
   title: string;
   description: string;
-  createdAt: string;
+  date: string;
   readTime: string;
+  href: string;
 };
-function ArticleCard(props: ArticleCardProps) {
-  const cardProps = props.cardProps ?? {};
 
+export default function ArticleCard({
+  title,
+  description,
+  date,
+  readTime,
+  href,
+}: ArticleCardProps) {
   return (
-    <FadingContainer className={cardProps.className}>
-      <Card
-        {...cardProps}
-        className={`flex transform flex-col gap-4 transition-transform duration-200 ease-in-out hover:scale-110 hover:shadow-2xl ${cardProps.className}`}
-      >
-        <a href="#">
-          <div className="flex flex-col flex-wrap gap-4">
-            <div className="flex flex-col gap-2">
-              <h2 className="text-xl font-bold">{props.title}</h2>
-              <p className="text-sm font-light">{props.description}</p>
-            </div>
+    <a
+      href={href}
+      className="group block transition-colors duration-200"
+    >
+      <article className="space-y-3">
+        {/* Metadata */}
+        <p className="text-xs text-text-muted">
+          {date} · {readTime}
+        </p>
 
-            <div className="flex items-center gap-4 text-xs text-[#999]">
-              <span>{props.createdAt}</span>
-              <span>|</span>
-              <span>{props.readTime}</span>
-            </div>
-          </div>
-        </a>
-      </Card>
-    </FadingContainer>
+        {/* Title with arrow */}
+        <h3 className="text-text-primary font-medium group-hover:text-accent transition-colors duration-200 flex items-center gap-2">
+          {title}
+          <FaArrowRight className="w-3 h-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200" />
+        </h3>
+
+        {/* Description */}
+        <p className="text-text-secondary text-sm leading-relaxed">
+          {description}
+        </p>
+      </article>
+    </a>
   );
 }
-
-export default ArticleCard;
